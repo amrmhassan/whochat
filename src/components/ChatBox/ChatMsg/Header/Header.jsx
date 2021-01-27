@@ -237,10 +237,7 @@ const Header = ({ currentOpenRoom, setOpenUserInfo }) => {
             aria-describedby='alert-dialog-slide-description'
           >
             <DialogTitle id='alert-dialog-slide-title'>
-              Delete Chat with{' '}
-              {currentOpenRoom.userToShowOnRoom.firstName +
-                ' ' +
-                currentOpenRoom.userToShowOnRoom.lastName}
+              Delete Chat with {currentOpenRoom.userToShowOnRoom.fullName}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id='alert-dialog-slide-description'>
