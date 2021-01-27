@@ -1,0 +1,81 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useStyle from './styles';
+import Header from './Header/Header';
+import MessagesContainer from './MessagesContainer/MessagesContainer';
+import ChatController from './ChatController/ChatController';
+import { getRoomsMessagesAction } from '../../../actions/messageActions';
+import {
+  acceptRoomAction,
+  blockRoomAction,
+} from '../../../actions/roomActions';
+import MessageWrapper from '../../global/MessageWrapper/MessageWrapper';
+import AcceptChat from './AcceptChat/AcceptChat';
+
+const ChatMsg = () => {
+  const classes = useStyle();
+  const dispatch = useDispatch();
+
+  const currentOpenRoom = useSelector((s) => s.currentOpenRoom);
+
+  const roomMessages = useSelector((s) => s.roomMessages);
+  const {
+    loading: loadingMessages = true,
+    messages: displayedMessages,
+    err: errGettingMessages,
+  } = roomMessages;
+
+  const { user } = useSelector((s) => s.loginUser);
+
+  useEffect(() => {
+    dispatch(getRoomsMessagesAction(currentOpenRoom._id));
+  }, [currentOpenRoom, dispatch]);
+
+  const handleAcceptChat = () => {
+    dispatch(acceptRoomAction(currentOpenRoom._id));
+  };
+  const handleBlockChat = () => {
+    dispatch(blockRoomAction(currentOpenRoom._id, currentOpenRoom.creator));
+  };
+
+  return (
+    <div className={classes.root}>
+      {currentOpenRoom._id && <Header currentOpenRoom={currentOpenRoom} />}
+
+      {currentOpenRoom._id && !currentOpenRoom.accepted ? (
+        currentOpenRoom.otherUser === user._id ? (
+          <AcceptChat
+            onAccept={handleAcceptChat}
+            onBlock={handleBlockChat}
+            message={`${currentOpenRoom.userToShowOnRoom.firstName} wants to chat you`}
+          ></AcceptChat>
+        ) : (
+          <MessageWrapper
+            message={`Wait until ${currentOpenRoom.userToShowOnRoom.firstName} accept your request`}
+          />
+        )
+      ) : loadingMessages ? (
+        <MessageWrapper message='Getting messages ...' />
+      ) : errGettingMessages ? (
+        <MessageWrapper severity='error' message={errGettingMessages} />
+      ) : (
+        <>
+          <MessagesContainer
+            user={user}
+            displayedMessages={displayedMessages}
+          />
+        </>
+      )}
+      {currentOpenRoom._id &&
+        currentOpenRoom.accepted &&
+        !currentOpenRoom.myBlock &&
+        !currentOpenRoom.otherUserBlock && (
+          <ChatController currentOpenRoom={currentOpenRoom} user={user} />
+        )}
+
+      <div className={classes.bgObjects}></div>
+    </div>
+  );
+};
+
+export default ChatMsg;
