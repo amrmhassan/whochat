@@ -7,6 +7,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import EmailIcon from '@material-ui/icons/Email';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 const ContactMe = () => {
   //? defining some variables
@@ -43,19 +44,19 @@ const ContactMe = () => {
         </header>
         <div className={classes.contentContainer}>
           <section>
-            <a href='http://facebook.com/amr'>
-              <IconButton title='Face Book'>
+            <a href='https://www.facebook.com/amrm.hassan.10'>
+              <IconButton title='FaceBook Profile'>
                 <FacebookIcon className={classes.facebook} />
               </IconButton>
             </a>
-            <a>
-              <IconButton title='Twitter Account'>
+            <a href='https://twitter.com/Amr07680989'>
+              <IconButton title='Twitter Profile'>
                 <TwitterIcon className={classes.twitter} />
               </IconButton>
             </a>
-            <a>
-              <IconButton title='Gmail'>
-                <EmailIcon className={classes.gmail} />
+            <a href='https://www.linkedin.com/in/amr-hassan-354985193/'>
+              <IconButton title='LinkedIn Profile'>
+                <LinkedInIcon className={classes.linkedIn} />
               </IconButton>
             </a>
           </section>

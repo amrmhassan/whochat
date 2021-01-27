@@ -80,9 +80,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '50px',
     color: '#1CA0F1',
   },
-  gmail: {
+  linkedIn: {
     fontSize: '50px',
-    color: '#F24436',
+    color: '#0A66C2',
   },
   phoneContainer: {
     display: 'flex',
