@@ -76,6 +76,21 @@ export const userResetPasswordReducer = (state = {}, action) => {
   }
 };
 
+export const searchUsersReducer = (state = {}, action) => {
+  switch (action.type) {
+    case c.SEARCH_USERS_REQUEST:
+      return { loading: true };
+    case c.SEARCH_USERS_SUCCESS:
+      return { loading: false, success: true, users: action.payload };
+    case c.SEARCH_USERS_FAIL:
+      return { loading: false, err: action.payload };
+    case c.SEARCH_USERS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 export const userVerifyEmailReducer = (state = {}, action) => {
   switch (action.type) {
     case c.VERIFY_USER_REQUEST:

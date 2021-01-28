@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, fade } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontFamily: 'Noto Sans JP, sans-serif',
     textAlign: 'left',
+    color: 'Black',
   },
   status: {
     //? activate the next line if a problem
@@ -53,10 +54,36 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
   },
 
-  '@media (min-width: 550px)': {
-    openSideBar: {
-      display: 'none',
+  search: {
+    marginRight: '30px',
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: 'white',
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
     },
+  },
+
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+  link: {
+    textDecoration: 'none',
   },
 }));
 export default useStyles;

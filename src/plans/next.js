@@ -1,6 +1,6 @@
 // add forgot password => DONE
 //? add sign with google and facebook
-//? add the ability to send emails to confirm users emails
+// add the ability to send emails to confirm users emails =>DONE
 // add accepting chat before the ability to type into it =>DONE
 // add delete chat =>DONE
 // add updating my infos =>DONE

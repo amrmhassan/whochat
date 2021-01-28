@@ -7,11 +7,13 @@ import moment from 'moment';
 import { setCurrentChattingUserData } from '../../../../actions/userActions';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
-const ChatGo = ({ room }) => {
+const ChatGo = ({ room, setOpenChatBox, setOpenSideBar }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
 
   const handleSetCurrentRoom = () => {
+    setOpenChatBox(true);
+    setOpenSideBar(false);
     const userObj = {
       userId: room.userToShowOnRoom._id,
     };

@@ -3,6 +3,7 @@ import LogIn from '../views/LogIn/LogIn';
 import SignUp from '../views/SignUp/SignUp';
 import ForgotPassword from '../views/ForgotPassword/ForgotPassword';
 import ResetPassword from '../views/ResetPassword/ResetPassword';
+import AddFriend from '../views/AddFriend/AddFriend';
 import VerifyEmail from '../views/VerifyEmail/VerifyEmail';
 import Home from '../views/Home/Home';
 import ContactMe from '../views/ContactMe/ContactMe';
@@ -18,6 +19,7 @@ const App = () => {
       <Route path='/home' component={Home} />
       <Route path='/contactMe' component={ContactMe} />
       <Route path='/forgotPassword' component={ForgotPassword} />
+      <Route path='/addFriend' component={AddFriend} />
       <Route path='/resetPassword/:token' component={ResetPassword} />
       <Route path='/verifyEmail/:token' component={VerifyEmail} />
       <Route path='/test' component={Test} />

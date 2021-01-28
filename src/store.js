@@ -8,6 +8,7 @@ import {
   setCurrentChattingUserDataReducer,
   updateMeReducer,
   userVerifyEmailReducer,
+  searchUsersReducer,
 } from './reducers/userReducers';
 import {
   getMyRoomsReducer,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   currentChattingUserData: setCurrentChattingUserDataReducer,
   updateMe: updateMeReducer,
   userVerifyEmail: userVerifyEmailReducer,
+  searchUsers: searchUsersReducer,
 });
 
 const loggedInUser = localStorage.getItem('loggedInUser')

@@ -14,6 +14,7 @@ import {
   DialogContentText,
 } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
+import { ArrowBack } from '@material-ui/icons';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyle from './styles';
 import moment from 'moment';
@@ -24,7 +25,12 @@ import {
 } from '../../../../actions/roomActions';
 import { setCurrentChattingUserData } from '../../../../actions/userActions';
 
-const Header = ({ currentOpenRoom, setOpenUserInfo }) => {
+const Header = ({
+  currentOpenRoom,
+  setOpenUserInfo,
+  setOpenSideBar,
+  setOpenChatBox,
+}) => {
   const classes = useStyle();
   const dispatch = useDispatch();
 
@@ -138,6 +144,11 @@ const Header = ({ currentOpenRoom, setOpenUserInfo }) => {
     handleCloseMenu();
   };
 
+  const handleOpenSideBar = () => {
+    setOpenSideBar(true);
+    setOpenChatBox(false);
+  };
+
   //? for 3 dots menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -164,30 +175,39 @@ const Header = ({ currentOpenRoom, setOpenUserInfo }) => {
   return (
     <>
       <div className={classes.root}>
-        <ButtonBase
-          onClick={() => setOpenUserInfo(true)}
-          className={classes.userInfoBtnBase}
-        >
-          <div className={classes.userInfo}>
-            <div className={classes.avatarContainer}>
-              <Avatar src={userData.photo} />
-            </div>
-            <div className={classes.info}>
-              <div className={classes.name}>{userData.fullName}</div>
-              <div className={classes.status}>
-                {status && status === 'startTyping'
-                  ? 'Typing ...'
-                  : status === 'online'
-                  ? 'Online'
-                  : status === 'offline'
-                  ? viewLastSeen()
-                  : status === 'stopTyping'
-                  ? 'Online'
-                  : ''}
+        <div>
+          <IconButton
+            className={classes.openSideBar}
+            size='small'
+            onClick={handleOpenSideBar}
+          >
+            <ArrowBack />
+          </IconButton>
+          <ButtonBase
+            onClick={() => setOpenUserInfo(true)}
+            className={classes.userInfoBtnBase}
+          >
+            <div className={classes.userInfo}>
+              <div className={classes.avatarContainer}>
+                <Avatar src={userData.photo} />
+              </div>
+              <div className={classes.info}>
+                <div className={classes.name}>{userData.fullName}</div>
+                <div className={classes.status}>
+                  {status && status === 'startTyping'
+                    ? 'Typing ...'
+                    : status === 'online'
+                    ? 'Online'
+                    : status === 'offline'
+                    ? viewLastSeen()
+                    : status === 'stopTyping'
+                    ? 'Online'
+                    : ''}
+                </div>
               </div>
             </div>
-          </div>
-        </ButtonBase>
+          </ButtonBase>
+        </div>
 
         <div className={classes.sidebarIcons}>
           <IconButton>

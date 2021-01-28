@@ -5,7 +5,7 @@ import ChatGo from './ChatGo/ChatGo';
 import { getMyRoomsAction } from '../../../actions/roomActions';
 import Message from '../../global/Message/Message';
 
-const ChatsContainer = () => {
+const ChatsContainer = ({ setOpenChatBox, setOpenSideBar }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const myRooms = useSelector((s) => s.myRooms);
@@ -28,7 +28,14 @@ const ChatsContainer = () => {
         ) : rooms.length < 1 ? (
           <Message message="You don't have chats yet 😊" />
         ) : (
-          rooms.map((room) => <ChatGo key={room._id} room={room} />)
+          rooms.map((room) => (
+            <ChatGo
+              key={room._id}
+              room={room}
+              setOpenChatBox={setOpenChatBox}
+              setOpenSideBar={setOpenSideBar}
+            />
+          ))
         )}
       </div>
     </>

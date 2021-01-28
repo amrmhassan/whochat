@@ -390,3 +390,36 @@ export const userVerifyEmailAction = (verifyToken, userEmail) => async (
     });
   }
 };
+
+export const searchUsersAction = (searchQuery) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: c.SEARCH_USERS_REQUEST,
+    });
+    const token = `Bearer ${getState().loginUser.user.token}`;
+    const config = {
+      headers: {
+        authorization: token,
+      },
+    };
+
+    const {
+      data: { data },
+    } = await axios.get(`${urls.usersUrl}/searchUsers/${searchQuery}`, config);
+    dispatch({
+      type: c.SEARCH_USERS_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: c.SEARCH_USERS_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};

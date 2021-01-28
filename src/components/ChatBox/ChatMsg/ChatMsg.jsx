@@ -15,7 +15,12 @@ import AcceptChat from './AcceptChat/AcceptChat';
 import Block from './Block/Block';
 import UserInfo from './UserInfo/UserInfo';
 
-const ChatMsg = ({ currentOpenRoom, currentOpenRoomId }) => {
+const ChatMsg = ({
+  currentOpenRoom,
+  currentOpenRoomId,
+  setOpenSideBar,
+  setOpenChatBox,
+}) => {
   const classes = useStyle();
   const dispatch = useDispatch();
 
@@ -47,6 +52,8 @@ const ChatMsg = ({ currentOpenRoom, currentOpenRoomId }) => {
         <Header
           setOpenUserInfo={setOpenUserInfo}
           currentOpenRoom={currentOpenRoom}
+          setOpenSideBar={setOpenSideBar}
+          setOpenChatBox={setOpenChatBox}
         />
       )}
       {/* //? for showing accepting or blocking messages */}

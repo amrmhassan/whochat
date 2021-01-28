@@ -10,5 +10,13 @@ const useStyles = makeStyles((theme) => ({
     //? for full screen remove width=0 && set flex=1
     //? on large screens remove width=0 && set flex=0.65
   },
+  closed: {
+    flex: 0,
+    width: 0,
+  },
+  open: {
+    width: '100%',
+    flex: '1',
+  },
 }));
 export default useStyles;

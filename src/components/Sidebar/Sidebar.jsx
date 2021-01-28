@@ -5,15 +5,24 @@ import SearchBox from './SearchBox/SearchBox';
 import ChatsContainer from './ChatsContainer/ChatsContainer';
 import UpdateMe from './UpdateMe/UpdateMe';
 
-const Sidebar = () => {
+const Sidebar = ({ open, smallScreen, setOpenChatBox, setOpenSideBar }) => {
   const classes = useStyle();
   const [openUpdateMe, setOpenUpdateMe] = useState(false);
 
   return (
-    <div className={classes.root}>
+    <div
+      className={
+        classes.root +
+        ' ' +
+        (smallScreen ? (open ? classes.open : classes.closed) : '')
+      }
+    >
       <Header setOpenUpdateMe={setOpenUpdateMe} />
       <SearchBox />
-      <ChatsContainer />
+      <ChatsContainer
+        setOpenChatBox={setOpenChatBox}
+        setOpenSideBar={setOpenSideBar}
+      />
       {/* Update me component */}
       <UpdateMe setOpenUpdateMe={setOpenUpdateMe} open={openUpdateMe} />
     </div>

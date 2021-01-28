@@ -32,44 +32,6 @@ export const getMyRoomsAction = () => async (dispatch, getState) => {
   }
 };
 
-export const createRoomAction = (otherUserEmail) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: c.CREATE_ROOM_REQUEST,
-    });
-    const token = `Bearer ${getState().loginUser.user.token}`;
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: token,
-      },
-    };
-
-    const {
-      data: { data },
-    } = await axios.post(
-      `${urls.roomsUrl}/createNewRoom`,
-      { otherUserEmail },
-      config
-    );
-    dispatch({
-      type: c.CREATE_ROOM_SUCCESS,
-      payload: data,
-    });
-  } catch (err) {
-    dispatch({
-      type: c.CREATE_ROOM_FAIL,
-      payload:
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : err.message,
-    });
-  }
-};
-
 export const setCurrentOpenRoomAction = (currentRoomId) => async (
   dispatch,
   getState
@@ -345,7 +307,7 @@ export const updateRoomAfterOneDeletedAction = (roomId) => (
   getState
 ) => {
   const currentOpenRoomId =
-    getState().currentOpenRoom &&
+    getState().currentOpenRoom.currentOpenRoom &&
     getState().currentOpenRoom.currentOpenRoom._id;
   if (currentOpenRoomId === roomId) {
     localStorage.removeItem('currentRoom');

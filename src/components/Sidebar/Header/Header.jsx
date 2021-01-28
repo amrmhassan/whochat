@@ -6,7 +6,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyle from './styles';
 import { logoutUser } from '../../../actions/userActions';
-import AddFriends from './AddFriends/AddFriends.jsx';
+import AddChats from './AddChats/AddChats';
 import { Link } from 'react-router-dom';
 
 const Header = ({ setOpenUpdateMe }) => {
@@ -42,7 +42,7 @@ const Header = ({ setOpenUpdateMe }) => {
       </IconButton>
       {/* <span>{user.firstName}</span> */}
       <div className={classes.sidebarIcons}>
-        <AddFriends open={open} setOpen={setOpen} />
+        <AddChats open={open} setOpen={setOpen} />
 
         <IconButton onClick={() => setOpen(true)} className={classes.addChat}>
           <Add />
@@ -82,7 +82,7 @@ const Header = ({ setOpenUpdateMe }) => {
               Logout
             </MenuItem>
             <MenuItem className={classes.menuItem}>
-              <Link to='/contactMe'> About Me</Link>
+              <Link to='/contactMe'> About Us</Link>
             </MenuItem>
           </Menu>
         </div>

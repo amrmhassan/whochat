@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -21,6 +21,10 @@ const App = ({ history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const [openSideBar, setOpenSideBar] = useState(true);
+  const [openChatBox, setOpenChatBox] = useState(true);
+  const [smallScreen, setSmallScreen] = useState(false);
+
   const loginUser = useSelector((s) => s.loginUser);
   const { user } = loginUser;
 
@@ -34,6 +38,15 @@ const App = ({ history }) => {
       dispatch(createSocketAction());
     }
   }, [dispatch, history, user]);
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 550) {
+      setOpenSideBar(true);
+      setOpenChatBox(false);
+      setSmallScreen(true);
+    }
+  }, []);
 
   //? for displaying room messages if there is a currentOpenRoom
   useEffect(() => {
@@ -132,8 +145,18 @@ const App = ({ history }) => {
 
   return user && user.token ? (
     <div className={classes.root}>
-      <Sidebar />
-      <ChatBox />
+      <Sidebar
+        smallScreen={smallScreen}
+        open={openSideBar}
+        setOpenChatBox={setOpenChatBox}
+        setOpenSideBar={setOpenSideBar}
+      />
+      <ChatBox
+        smallScreen={smallScreen}
+        open={openChatBox}
+        setOpenSideBar={setOpenSideBar}
+        setOpenChatBox={setOpenChatBox}
+      />
     </div>
   ) : null;
 };

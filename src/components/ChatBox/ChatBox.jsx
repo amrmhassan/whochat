@@ -5,7 +5,7 @@ import NoChat from './NoChat/NoChat';
 import ChatMsg from './ChatMsg/ChatMsg';
 import { setCurrentOpenRoomAction } from '../../actions/roomActions';
 
-const ChatBox = () => {
+const ChatBox = ({ open, setOpenSideBar, setOpenChatBox, smallScreen }) => {
   const dispatch = useDispatch();
   const currentOpenRoom = useSelector((s) => s.currentOpenRoom);
   const {
@@ -22,11 +22,19 @@ const ChatBox = () => {
 
   const classes = useStyle();
   return (
-    <div className={classes.root}>
+    <div
+      className={
+        classes.root +
+        ' ' +
+        (smallScreen ? (open ? classes.open : classes.closed) : '')
+      }
+    >
       {currentOpenRoomId && currentOpenRoomData._id ? (
         <ChatMsg
           currentOpenRoomId={currentOpenRoomId}
           currentOpenRoom={currentOpenRoomData}
+          setOpenSideBar={setOpenSideBar}
+          setOpenChatBox={setOpenChatBox}
         />
       ) : (
         <NoChat />
