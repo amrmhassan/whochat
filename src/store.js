@@ -56,15 +56,16 @@ let initialState = {
   currentChattingUserData: currentChattingUserData,
 };
 
-const middleware = [];
+const middleware = [thunk];
+let store;
 if (process.env.NODE_ENV === 'development') {
-  middleware.push(thunk);
+  store = createStore(
+    reducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
+} else {
+  store = createStore(reducer, initialState, applyMiddleware(...middleware));
 }
-
-const store = createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
 
 export default store;
