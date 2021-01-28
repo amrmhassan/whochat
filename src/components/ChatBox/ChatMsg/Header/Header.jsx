@@ -96,15 +96,7 @@ const Header = ({
       } else if (differenceDays <= 7 && differenceDays > 0) {
         //! adding the days for the last week
         console.log('in the last week');
-        const days = [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-        ];
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         return days[customDate.getDay()];
       } else if (differenceDays < 0) {
         return 'The custom date is in the future';
