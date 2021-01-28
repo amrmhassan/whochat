@@ -74,17 +74,18 @@ const MessagesContainer = ({ user }) => {
   return (
     <>
       <div id='messages-container' className={classes.root}>
-        <Message
-          message={{ messageTXT: 'Messages are stored in secure server 🔐' }}
-          sender='admin'
-        />
-
         {loadingMessages ? (
           <MessageWrapper message='Getting messages ...' />
         ) : errGettingMessages ? (
           <MessageWrapper severity='error' message={errGettingMessages} />
         ) : (
           <>
+            <Message
+              message={{
+                messageTXT: 'Messages are stored in secure server 🔐',
+              }}
+              sender='admin'
+            />
             {displayedMessages.map((msg) => (
               <Message
                 key={msg.clientId}
