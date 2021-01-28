@@ -8,7 +8,7 @@ switch (process.env.NODE_ENV) {
     host = 'http://localhost:5000';
     break;
   case 'production':
-    host = 'http://whochats-backend.herokuapp.com';
+    host = 'https://whochats-backend.herokuapp.com';
     break;
   default:
     host = '';
