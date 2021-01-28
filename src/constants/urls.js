@@ -1,4 +1,4 @@
-// export const host = 'https://amh-whatapp-clone.herokuapp.com';
+// export const host = 'http://whochats-backend.herokuapp.com/';
 // export const host = 'http://localhost:5000';
 
 export let host = '';
@@ -8,7 +8,7 @@ switch (process.env.NODE_ENV) {
     host = 'http://localhost:5000';
     break;
   case 'production':
-    host = 'https://amh-whatapp-clone.herokuapp.com';
+    host = 'http://whochats-backend.herokuapp.com';
     break;
   default:
     host = '';
