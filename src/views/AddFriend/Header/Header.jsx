@@ -38,7 +38,10 @@ const Header = () => {
         </Link>
       </ButtonBase>
       <div className={classes.search}>
-        <form onSubmit={handleSubmitSearchFriends}>
+        <form
+          className={classes.searchForm}
+          onSubmit={handleSubmitSearchFriends}
+        >
           <InputBase
             placeholder='Search…'
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -49,7 +52,11 @@ const Header = () => {
             }}
             inputProps={{ 'aria-label': 'search' }}
           />
-          <Button disabled={searchQuery.length === 0} type='submit'>
+          <Button
+            className={classes.searchBtn}
+            disabled={searchQuery.length === 0}
+            type='submit'
+          >
             <SearchIcon />
           </Button>
         </form>

@@ -41,7 +41,7 @@ const App = ({ history }) => {
 
   useEffect(() => {
     const windowWidth = window.innerWidth;
-    if (windowWidth <= 550) {
+    if (windowWidth <= 600) {
       setOpenSideBar(true);
       setOpenChatBox(false);
       setSmallScreen(true);

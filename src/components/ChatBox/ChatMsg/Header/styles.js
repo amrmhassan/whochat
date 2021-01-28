@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
   },
 
-  '@media (min-width: 550px)': {
+  '@media (min-width: 600px)': {
     openSideBar: {
       display: 'none',
     },

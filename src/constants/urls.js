@@ -1,5 +1,6 @@
-// export const host = 'http://whochats-backend.herokuapp.com/';
+// export const host = 'https://whochats-backend.herokuapp.com/';
 // export const host = 'http://localhost:5000';
+//! if you send from https to http you will get an error with (blocked:mixed-content)
 
 export let host = '';
 

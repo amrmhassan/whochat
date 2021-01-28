@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
   inputRoot: {
     color: 'inherit',
+    flex: 1,
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -84,6 +85,10 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
+  },
+  searchBtn: {},
+  searchForm: {
+    display: 'flex',
   },
 }));
 export default useStyles;

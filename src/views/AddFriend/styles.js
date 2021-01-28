@@ -4,7 +4,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '90vw',
     height: '90vh',
-    minWidth: '650px',
     background: 'white',
     position: 'relative',
     zIndex: '2',
@@ -40,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
       width: '100vw',
       height: '100vh',
     },
+  },
+
+  searchBtn: {
+    float: 'left',
   },
 }));
 export default useStyles;
