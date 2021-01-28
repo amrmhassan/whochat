@@ -56,7 +56,10 @@ let initialState = {
   currentChattingUserData: currentChattingUserData,
 };
 
-const middleware = [thunk];
+const middleware = [];
+if (process.env.NODE_ENV === 'development') {
+  middleware.push(thunk);
+}
 
 const store = createStore(
   reducer,
