@@ -113,11 +113,7 @@ const Header = ({
       }
     };
 
-    return `Last seen ${dayString(
-      nowObj,
-      customDateObj,
-      customDate
-    )} At ${hour}`;
+    return `Seen ${dayString(nowObj, customDateObj, customDate)} At ${hour}`;
   };
 
   const handleCloseDialog = () => {
