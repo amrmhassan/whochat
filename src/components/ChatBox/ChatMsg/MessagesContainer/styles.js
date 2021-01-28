@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
     position: 'relative',
     zIndex: 10,
+
     scrollBehavior: 'smooth',
   },
 

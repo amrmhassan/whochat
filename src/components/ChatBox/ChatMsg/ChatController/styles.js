@@ -36,5 +36,50 @@ const useStyles = makeStyles((theme) => ({
   send: {
     color: '#9B9B9B',
   },
+
+  recordingContainer: {
+    padding: '0 5px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  cancelRecording: {
+    border: '2px solid #E75E5A',
+    color: '#E75E5A',
+    '&:hover': {
+      backgroundColor: '#E75E5A',
+      color: 'white',
+    },
+  },
+  sendRecord: {
+    border: '2px solid #37D87E',
+    color: '#37D87E',
+    '&:hover': {
+      backgroundColor: '#37D87E',
+      color: 'white',
+    },
+  },
+  recordTimeContainer: {
+    margin: '0 8px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  recordingRedDot: {
+    width: '15px',
+    height: '15px',
+    backgroundColor: '#E75E5A',
+    borderRadius: '50%',
+    display: 'inline-block',
+    marginRight: '5px',
+    animation: '$animateRedDot 1s infinite ',
+  },
+
+  '@keyframes animateRedDot': {
+    '0%, 100%': {
+      backgroundColor: 'transparent',
+    },
+    '50%': {
+      backgroundColor: '#E75E5A',
+    },
+  },
 }));
 export default useStyles;

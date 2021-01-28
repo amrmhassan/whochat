@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@material-ui/core';
-import { Send } from '@material-ui/icons';
+import { Send, Mic, Close, Done } from '@material-ui/icons';
 import useStyle from './styles';
 import {
   createMessageAction,
@@ -15,6 +15,7 @@ const ChatController = ({ currentOpenRoom, user }) => {
 
   const [message, setMessage] = useState('');
   const [typing, setTyping] = useState(false);
+  const [recording, setRecording] = useState(false);
 
   const socket = useSelector((s) => s.socket);
 
@@ -41,6 +42,17 @@ const ChatController = ({ currentOpenRoom, user }) => {
 
   const handleTypingMessage = (e) => {
     setMessage(e.target.value);
+  };
+
+  const handleStartRecording = () => {
+    setRecording(true);
+  };
+
+  const handleCancelRecording = () => {
+    setRecording(false);
+  };
+  const handleSendRecording = () => {
+    setRecording(false);
   };
 
   //? for setting typing variable when typing
@@ -99,6 +111,7 @@ const ChatController = ({ currentOpenRoom, user }) => {
       {/* <input hidden={true} autoComplete={false} /> */}
       <div className={classes.msgBox}>
         <input
+          disabled={recording}
           id='new-message-input'
           autoFocus={true}
           placeholder='Type a message'
@@ -111,9 +124,36 @@ const ChatController = ({ currentOpenRoom, user }) => {
         />
       </div>
       <div className={classes.send}>
-        <IconButton disabled={!message && true} type='submit'>
-          <Send style={{ color: '#9B9B9B' }} />
-        </IconButton>
+        {recording ? (
+          <div className={classes.recordingContainer}>
+            <IconButton
+              onClick={handleCancelRecording}
+              size='small'
+              className={classes.cancelRecording}
+            >
+              <Close />
+            </IconButton>
+            <div className={classes.recordTimeContainer}>
+              <span className={classes.recordingRedDot}></span>
+              <span className={classes.recordingTim}>1:00</span>
+            </div>
+            <IconButton
+              onClick={handleSendRecording}
+              size='small'
+              className={classes.sendRecord}
+            >
+              <Done />
+            </IconButton>
+          </div>
+        ) : message ? (
+          <IconButton type='submit'>
+            <Send style={{ color: '#9B9B9B' }} />
+          </IconButton>
+        ) : (
+          <IconButton onClick={handleStartRecording}>
+            <Mic />
+          </IconButton>
+        )}
       </div>
     </form>
   );
