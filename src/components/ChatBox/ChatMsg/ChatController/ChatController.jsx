@@ -51,10 +51,10 @@ const ChatController = ({ currentOpenRoom, user }) => {
   };
 
   const handleStartRecording = async () => {
-    setRecording(true);
     const stream = await record.getAudioStream();
     await record.mediaRecorder(stream);
     record.startRec();
+    setRecording(true);
   };
 
   const uploadRecording = async () => {
