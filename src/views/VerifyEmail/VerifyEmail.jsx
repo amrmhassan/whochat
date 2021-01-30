@@ -26,10 +26,6 @@ const VerifyEmail = ({ history, match }) => {
 
   //? for verifying email
   useEffect(() => {
-    console.log({
-      email: user.email,
-      token,
-    });
     if (user && user.email && token) {
       dispatch(userVerifyEmailAction(token, user.email));
     }

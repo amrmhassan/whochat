@@ -74,7 +74,7 @@ const UpdateMe = ({ open, setOpenUpdateMe }) => {
       };
 
       const { data } = await axios.post(
-        `${urls.host}/api/v1/upload`,
+        `${urls.host}/api/v1/uploadProfilePhotoRoute`,
         formData,
         config
       );

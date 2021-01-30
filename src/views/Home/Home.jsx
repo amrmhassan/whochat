@@ -66,7 +66,13 @@ const App = ({ history }) => {
         //! then the constant will be UPDATE_DISPLAYED_MESSAGES
         //! the reducer will push the new message to the displayed messages
         dispatch(updateRoomMessagesAction(data));
+
+        //! this functionality won't work now
+        //? we will mark message as seen if the small screen is false and chat box is open
+        //? and the markMessageAsSeen action will take are of determining the current open chat
+        // if (smallScreen && openChatBox) {
         dispatch(markMessageAsSeen(data));
+        // }
       });
 
       socket.on('server--user-added-new-room', (room) => {

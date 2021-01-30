@@ -13,8 +13,10 @@
 //? after sending them friend requests they will be on their friend list
 //? the message sender user can then chat them with his real identity or fake one
 //? but he can't chat a user that isn't a friend
+//? let non verified-email users login to a page that they can request for another email verification message
 //! The app candidate names (Who - )
-//? add addFriends Route in frontend
+
+// add addFriends Route in frontend
 
 //! my app default theme will be the glassy with blue violet and pink colors
 //! -- or similar colors

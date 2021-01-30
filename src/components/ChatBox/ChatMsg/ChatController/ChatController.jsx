@@ -8,6 +8,9 @@ import {
   updateRoomMessagesAction,
 } from '../../../../actions/messageActions';
 import { v4 as uuidV4 } from 'uuid';
+import Record from '../../../../utils/record.js';
+import axios from 'axios';
+import * as urls from '../../../../constants/urls';
 
 const ChatController = ({ currentOpenRoom, user }) => {
   const classes = useStyle();
@@ -16,6 +19,9 @@ const ChatController = ({ currentOpenRoom, user }) => {
   const [message, setMessage] = useState('');
   const [typing, setTyping] = useState(false);
   const [recording, setRecording] = useState(false);
+  const [record] = useState(new Record());
+  const [timeText, setTimeText] = useState('00:00');
+  const [currentInterval, setCurrentInterval] = useState();
 
   const socket = useSelector((s) => s.socket);
 
@@ -44,17 +50,97 @@ const ChatController = ({ currentOpenRoom, user }) => {
     setMessage(e.target.value);
   };
 
-  const handleStartRecording = () => {
+  const handleStartRecording = async () => {
     setRecording(true);
+    const stream = await record.getAudioStream();
+    await record.mediaRecorder(stream);
+    record.startRec();
   };
 
-  const handleCancelRecording = () => {
-    setRecording(false);
-  };
-  const handleSendRecording = () => {
-    setRecording(false);
+  const uploadRecording = async () => {
+    const formData = record.formData;
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post(
+        `${urls.host}/api/v1/uploadRecordRoute`,
+        formData,
+        config
+      );
+      //? submitting th message
+      const messageObj = {
+        room: currentOpenRoom._id,
+        receiver: currentOpenRoom.userToShowOnRoom._id,
+        messageTXT: 'Record',
+        clientId: uuidV4(),
+        status: 'written',
+        messageType: 'record',
+        mediaLink: data.path,
+      };
+
+      dispatch(updateRoomMessagesAction(messageObj));
+      dispatch(createMessageAction(messageObj));
+
+      //?end submitting th message
+    } catch (err) {
+      alert('ERROR UPLOADING YOUR IMAGE');
+      console.log(err);
+    }
   };
 
+  const handleCancelRecording = async () => {
+    setRecording(false);
+    await record.stopRec();
+  };
+  const handleSendRecording = async () => {
+    setRecording(false);
+    await record.stopRec();
+    uploadRecording();
+  };
+
+  //? for starting recordTime changing
+  useEffect(() => {
+    let minutes = 0;
+    let seconds = 0;
+    let minutesTXT = '';
+    let secondsTXT = '';
+    if (recording) {
+      setCurrentInterval(
+        setInterval(() => {
+          seconds++;
+          if (seconds >= 60) {
+            minutes++;
+            seconds = 0;
+          }
+          if (minutes < 10) {
+            minutesTXT = `0${minutes}`;
+          } else {
+            minutesTXT = `${minutes}`;
+          }
+          if (seconds < 10) {
+            secondsTXT = `0${seconds}`;
+          } else {
+            secondsTXT = `${seconds}`;
+          }
+          setTimeText(`${minutesTXT}:${secondsTXT}`);
+        }, 1000)
+      );
+    } else if (timeText !== '00:00') {
+      minutes = 0;
+      seconds = 0;
+      minutesTXT = '';
+      secondsTXT = '';
+      setTimeText('00:00');
+      if (currentInterval) clearInterval(currentInterval);
+    }
+    //! the next step is to upload the recording
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recording]);
   //? for setting typing variable when typing
   useEffect(() => {
     if (message.trim()) {
@@ -108,7 +194,6 @@ const ChatController = ({ currentOpenRoom, user }) => {
       className={classes.root}
       onSubmit={handleSubmitMessage}
     >
-      {/* <input hidden={true} autoComplete={false} /> */}
       <div className={classes.msgBox}>
         <input
           disabled={recording}
@@ -120,7 +205,7 @@ const ChatController = ({ currentOpenRoom, user }) => {
           rows='1'
           value={message}
           onChange={handleTypingMessage}
-          autoComplete={false}
+          autoComplete='off'
         />
       </div>
       <div className={classes.send}>
@@ -135,7 +220,7 @@ const ChatController = ({ currentOpenRoom, user }) => {
             </IconButton>
             <div className={classes.recordTimeContainer}>
               <span className={classes.recordingRedDot}></span>
-              <span className={classes.recordingTim}>1:00</span>
+              <span className={classes.recordingTim}>{timeText}</span>
             </div>
             <IconButton
               onClick={handleSendRecording}

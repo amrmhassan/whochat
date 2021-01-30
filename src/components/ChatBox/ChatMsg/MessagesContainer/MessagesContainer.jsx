@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useStyle from './styles';
 import Message from './Message/Message';
+import Record from './Record/Record';
 import { IconButton } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import MessageWrapper from '../../../global/MessageWrapper/MessageWrapper';
@@ -12,7 +13,7 @@ const MessagesContainer = ({ user }) => {
   const roomMessages = useSelector((s) => s.roomMessages);
   const {
     loading: loadingMessages = true,
-    messages: displayedMessages,
+    messages: displayedMessages = [],
     err: errGettingMessages,
   } = roomMessages;
 
@@ -51,7 +52,7 @@ const MessagesContainer = ({ user }) => {
     ) {
       scrollToEnd();
     }
-  }, [displayedMessages, status]);
+  }, [displayedMessages.length, status]);
 
   //? for adding scroll event
 
@@ -81,24 +82,36 @@ const MessagesContainer = ({ user }) => {
         ) : (
           <>
             <Message
+              key={'startingMessage'}
               message={{
                 messageTXT: 'Messages are stored in secure server 🔐',
               }}
               sender='admin'
             />
-            {displayedMessages.map((msg) => (
-              <Message
-                key={msg.clientId}
-                message={msg}
-                sender={
-                  msg.sender === user._id || !msg.sender
-                    ? 'me'
-                    : msg.sender === 'admin'
-                    ? 'admin'
-                    : 'other'
-                }
-              />
-            ))}
+            {displayedMessages.map((msg) =>
+              msg.messageType === 'text' ? (
+                <Message
+                  key={msg.clientId}
+                  message={msg}
+                  sender={
+                    msg.sender === user._id || !msg.sender
+                      ? 'me'
+                      : msg.sender === 'admin'
+                      ? 'admin'
+                      : 'other'
+                  }
+                />
+              ) : (
+                <Record
+                  key={msg.clientId}
+                  message={msg}
+                  sender={
+                    msg.sender === user._id || !msg.sender ? 'me' : 'other'
+                  }
+                  mediaLink={msg.mediaLink}
+                />
+              )
+            )}
             {status && status === 'startTyping' && <MessageTyping />}
           </>
         )}
