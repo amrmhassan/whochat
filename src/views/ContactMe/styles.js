@@ -27,13 +27,20 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     width: '100%',
-    height: '200px',
+    // minHeight: '200px',
     backgroundColor: '#EDEDED',
     boxShadow: '0 1px 3px #ccc, 0 -1px 3px #ccc ',
-
     display: 'flex',
     alignItems: 'center',
     padding: '10px',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  avatarAndBackContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   myPic: {
     width: '180px',
@@ -143,6 +150,13 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     '&:hover': {
       backgroundColor: '#049560',
+    },
+  },
+
+  '@media (max-width: 1200px)': {
+    root: {
+      width: '100vw',
+      height: '100vh',
     },
   },
 }));

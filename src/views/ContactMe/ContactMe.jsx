@@ -5,7 +5,6 @@ import { ArrowBack } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import EmailIcon from '@material-ui/icons/Email';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
@@ -22,14 +21,17 @@ const ContactMe = () => {
     <>
       <div className={classes.root}>
         <header className={classes.header}>
-          <Link
-            to='/'
-            style={{ width: '20px', height: '20px', marginRight: '20px' }}
-          >
-            <ArrowBack />
-          </Link>
+          <div className={classes.avatarAndBackContainer}>
+            <Link
+              to='/'
+              style={{ width: '20px', height: '20px', marginRight: '20px' }}
+            >
+              <ArrowBack />
+            </Link>
 
-          <Avatar src='/images/other/mine.jpg' className={classes.myPic} />
+            <Avatar src='/images/other/mine.jpg' className={classes.myPic} />
+          </div>
+
           <div className={classes.info}>
             <div className={classes.myName}>Amr Mohammed Hassan</div>
             <div className={classes.myEmail}>

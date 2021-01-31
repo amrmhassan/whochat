@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
     margin: '20px',
     display: 'inline-block',
-    width: '300px',
+    width: '250px',
     position: 'relative',
   },
   media: {

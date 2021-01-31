@@ -82,7 +82,10 @@ const Header = ({ setOpenUpdateMe }) => {
               Logout
             </MenuItem>
             <MenuItem className={classes.menuItem}>
-              <Link to='/contactMe'> About Us</Link>
+              <Link className={classes.link} to='/contactMe'>
+                {' '}
+                About Us
+              </Link>
             </MenuItem>
           </Menu>
         </div>
